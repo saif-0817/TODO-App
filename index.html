@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Slab:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <div id="notifications">
+        <h3 id="message"></h3>
+    </div>
+    <form id="form">
+        <div class="input-group">
+            <a href="#" id="clearInput">❌</a>
+            <input type="text" id="input-task" class="input-field">
+            <span id="error"></span>
+        </div>
+
+        <div id="buttons-group">
+            <button id="add-task">Add Task</button>
+            <button id="update-btn">Update Task</button>
+        </div>
+
+    </form>
+    <ul id="tasks"></ul>
+
+    <div id="modal">
+        <div class="task-header">
+            <h2>
+                Task Details
+            </h2>
+            <a href="#" id="modal-close">❌</a>
+        </div>
+
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+
+    <div id="offset"></div>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
