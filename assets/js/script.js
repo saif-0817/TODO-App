@@ -131,7 +131,7 @@ function fetchTask() {
         saveTasksList.forEach((task, index) => {
             tasks.innerHTML += `
                 <li class="task-items" onClick="taskDetails(${index})">
-                    <span class="task-content">${index + 1}. ${task.savedTask}</span>
+                    <span class="task-content">${index + 1}] ${task.savedTask}</span>
                     <button class="editbtn" onClick="editTask(event,${index})" type="button">🖊</button>
                     <button class="deletebtn" onClick="deleteTask(event,${index})" type="button">❌</button>
                 </li>`;
