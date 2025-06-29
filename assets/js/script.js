@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 const inputTask = document.getElementById('input-task');
 const addTask = document.getElementById('add-task');
 const updateBtn = document.getElementById('update-btn');
+const cancelBtn = document.getElementById('cancel-btn');
 const clearInput = document.getElementById('clearInput');
 const tasks = document.getElementById('tasks');
 const notifications = document.getElementById('notifications');
@@ -13,6 +14,7 @@ const modalClose = document.getElementById('modal-close');
 const offset = document.getElementById('offset');
 const modalContent = document.querySelector('.modal-content');
 let listIndex = null;
+
 
 document.addEventListener('DOMContentLoaded', fetchTask);
 clearInput.addEventListener('click', clearTaskInput);
@@ -69,6 +71,7 @@ function editTask(event, index) {
     listIndex = index;
     addTask.style.display = 'none';
     updateBtn.style.display = 'block';
+    cancelBtn.style.display = 'block';
     console.log(index);
     const saveTasksList = JSON.parse(localStorage.getItem('storedList')) || [];
     const editedItem = saveTasksList[index];
@@ -107,6 +110,21 @@ function updateTask(e) {
         fetchTask();
     }
 }
+cancelBtn.addEventListener('click', () => {
+
+    const skipEdit = confirm(`Are you sure you wanna cancel editing?`);
+
+    if (skipEdit) {
+
+        addTask.style.display = 'block';
+        updateBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        notificationAlert(`<h3>Task editing cancelled!</h3 >`);
+        clearTaskInput();
+        fetchTask();
+    }
+})
+
 
 function deleteTask(event, index) {
     event.stopPropagation();
@@ -116,11 +134,17 @@ function deleteTask(event, index) {
         addTask.style.display = 'block';
         updateBtn.style.display = 'none';
     }
+
     const saveTasksList = JSON.parse(localStorage.getItem('storedList')) || [];
-    saveTasksList.splice(index, 1);
-    localStorage.setItem('storedList', JSON.stringify(saveTasksList));
-    fetchTask();
-    notificationAlert('<h3>Task successfully deleted!</h3 >');
+    const itemToDel = saveTasksList[index];
+    const confirm = window.confirm(`Are you sure, youn want to delete this task '${itemToDel.savedTask}'?`);
+    if (confirm) {
+        saveTasksList.splice(index, 1);
+        localStorage.setItem('storedList', JSON.stringify(saveTasksList));
+        fetchTask();
+        notificationAlert('<h3>Task successfully deleted!</h3 >');
+    }
+
 }
 
 function fetchTask() {
