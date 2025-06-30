@@ -4,6 +4,7 @@ const addTask = document.getElementById('add-task');
 const updateBtn = document.getElementById('update-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const clearInput = document.getElementById('clearInput');
+const filter = document.getElementById('filter-task');
 const tasks = document.getElementById('tasks');
 const notifications = document.getElementById('notifications');
 const message = document.getElementById('message');
@@ -58,7 +59,38 @@ offset.addEventListener('click', () => {
 modalClose.addEventListener('click', () => {
     modal.style.display = 'none';
     offset.style.display = 'none';
-})
+});
+cancelBtn.addEventListener('click', () => {
+
+    const skipEdit = confirm(`Are you sure you wanna cancel editing?`);
+
+    if (skipEdit) {
+
+        addTask.style.display = 'block';
+        updateBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        notificationAlert(`<h3>Task editing cancelled!</h3 >`);
+        clearTaskInput();
+        fetchTask();
+    }
+});
+
+filter.addEventListener('input', (e) => {
+    const filterInput = e.target.value.toLowerCase();
+    const currentTaskItems = document.querySelectorAll('.task-items');
+    currentTaskItems.forEach(task => {
+        const taskText = task.textContent.toLowerCase();
+        if (taskText.includes(filterInput)) {
+            task.style.display = 'block';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+
+
+});
+
+
 
 function clearTaskInput() {
     inputTask.value = '';
@@ -110,20 +142,7 @@ function updateTask(e) {
         fetchTask();
     }
 }
-cancelBtn.addEventListener('click', () => {
 
-    const skipEdit = confirm(`Are you sure you wanna cancel editing?`);
-
-    if (skipEdit) {
-
-        addTask.style.display = 'block';
-        updateBtn.style.display = 'none';
-        cancelBtn.style.display = 'none';
-        notificationAlert(`<h3>Task editing cancelled!</h3 >`);
-        clearTaskInput();
-        fetchTask();
-    }
-})
 
 
 function deleteTask(event, index) {
